@@ -1,0 +1,52 @@
+# docker-compose.yml
+version: '1'
+
+services:
+    pyspark:
+        image: jupyter/pyspark-notebook:latest
+        # build:
+        # # build from Dockerfile
+        #   context: ./Path
+        #   dockerfile: Dockerfile
+        ports:
+        - "10000:8888"
+        volumes:
+        - .:/code
+    
+    # The name of our service is "database"
+    # but you can use the name of your choice.
+    # Note: This may change the commands you are going to use a little bit.
+    postgres:
+        container_name: postgres_db
+        # Official Postgres image from DockerHub (we use the last version)
+        image: 'postgres:13'
+        
+        volumes:
+            #- postgres_data:/var/lib/postgresql/data/
+            - ./postgres/data:/var/lib/postgresql/data
+
+        # By default, a Postgres database is running on the 5432 port.
+        # If we want to access the database from our computer (outside the container),
+        # we must share the port with our computer's port.
+        # The syntax is [port we want on our machine]:[port we want to retrieve in the container]
+        # Note: You are free to change your computer's port,
+        # but take into consideration that it will change the way
+        # you are connecting to your database.
+        ports:
+            - 10002:5432
+
+        environment:
+            - POSTGRES_DB=postgres # The PostgreSQL default database (automatically created at first launch)
+            - POSTGRES_USER=postgres # The PostgreSQL user (useful to connect to the database)
+            - POSTGRES_PASSWORD=postgres # The PostgreSQL password (useful to connect to the database)
+            - "POSTGRES_HOST_AUTH_METHOD=trust"
+    
+    pgadmin:
+        container_name: pgadmin4
+        image: dpage/pgadmin4
+        restart: always
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: admin
+        ports:
+            - "10001:80"
