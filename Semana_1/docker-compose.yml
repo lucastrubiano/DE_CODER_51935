@@ -1,5 +1,5 @@
 # docker-compose.yml
-version: '1'
+version: '3'
 
 services:
     pyspark:
@@ -8,14 +8,22 @@ services:
         # # build from Dockerfile
         #   context: ./Path
         #   dockerfile: Dockerfile
+        container_name: pyspark
         ports:
-        - "10000:8888"
+            - "8888:8888"
         volumes:
-        - .:/code
+            - ./:/home/lucas/work
+            - ./secrets:/etc/secrets
+        user: root
+        working_dir: /home/lucas/work
+        environment:
+            JUPYTER_ENABLE_LAB: '1' 
+            NB_USER: lucas
+            NB_GID: 1000
+            CHOWN_HOME: 'yes'
+            CHOWN_HOME_OPTS: '-R'
+
     
-    # The name of our service is "database"
-    # but you can use the name of your choice.
-    # Note: This may change the commands you are going to use a little bit.
     postgres:
         container_name: postgres_db
         # Official Postgres image from DockerHub (we use the last version)
