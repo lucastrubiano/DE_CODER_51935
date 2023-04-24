@@ -13,7 +13,7 @@ services:
             - "8888:8888"
         volumes:
             - ./docker_shared_folder/working_dir:/home/lucas/working_dir
-            - ./docker_shared_folder/secrets:/etc/secrets
+            # - ./docker_shared_folder/secrets:/etc/secrets
         user: root
         working_dir: /home/lucas/working_dir
         environment:
