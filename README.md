@@ -1,8 +1,19 @@
-# Data-Engineering
-Repositorio para curso Data Engineering, modalidad Flex /
-© Coderhouse 2022 Todos los derechos reservados /
-Repositorio exclusivo para usos didácticos de Coderhouse, se prohíbe expresamente toda forma de reproducción tanto en forma digital como física /
-Amparado por la ley internacional de derechos de autor.
+# Data-Engineering-Flex
 
-Modificado por Prof. Lucas Trubiano para la comisión 51935 (DE Flex - 2023)
+Repositorio modificado por **Profesor Lucas Trubiano** para la comisión 51935 y 51940 (DE Flex - 2023).
 
+
+
+### Semanas:
+- [Semana 1](Semana_1/Semana_1.md)
+
+
+---
+
+    Repositorio para curso Data Engineering Flex
+
+    © Coderhouse 2022 Todos los derechos reservados.
+
+    Repositorio exclusivo para usos didácticos de Coderhouse, se prohíbe expresamente toda forma de reproducción tanto en forma digital como física.
+
+    Amparado por la ley internacional de derechos de autor.
