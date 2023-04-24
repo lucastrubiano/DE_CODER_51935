@@ -24,7 +24,6 @@ services:
             CHOWN_HOME_OPTS: '-R'
             SPARK_CLASSPATH: '/home/lucas/working_dir/driver_jdbc/postgresql-42.2.27.jre7.jar'
 
-    
     postgres:
         container_name: postgres_db
         # Official Postgres image from DockerHub (we use the last version)
@@ -50,12 +49,12 @@ services:
             - POSTGRES_PASSWORD=postgres # The PostgreSQL password (useful to connect to the database)
             - "POSTGRES_HOST_AUTH_METHOD=trust"
     
-    pgadmin:
-        container_name: pgadmin4
-        image: dpage/pgadmin4:7
-        restart: always
-        environment:
-            PGADMIN_DEFAULT_EMAIL: admin@admin.com
-            PGADMIN_DEFAULT_PASSWORD: admin
-        ports:
-            - "10003:80"
+    # pgadmin:
+    #     container_name: pgadmin4
+    #     image: dpage/pgadmin4:7
+    #     restart: always
+    #     environment:
+    #         PGADMIN_DEFAULT_EMAIL: admin@admin.com
+    #         PGADMIN_DEFAULT_PASSWORD: admin
+    #     ports:
+    #         - "10003:80"
