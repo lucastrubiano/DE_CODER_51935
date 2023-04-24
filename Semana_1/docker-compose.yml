@@ -3,7 +3,7 @@ version: '3'
 
 services:
     pyspark:
-        image: jupyter/pyspark-notebook:latest
+        image: jupyter/pyspark-notebook:2023-04-24
         # build:
         # # build from Dockerfile
         #   context: ./Path
@@ -12,10 +12,10 @@ services:
         ports:
             - "8888:8888"
         volumes:
-            - ./docker_shared_folder/work:/home/lucas/work
+            - ./docker_shared_folder/working_dir:/home/lucas/working_dir
             - ./docker_shared_folder/secrets:/etc/secrets
         user: root
-        working_dir: /home/lucas/work
+        working_dir: /home/lucas/working_dir
         environment:
             JUPYTER_ENABLE_LAB: '1' 
             NB_USER: lucas
@@ -51,10 +51,10 @@ services:
     
     pgadmin:
         container_name: pgadmin4
-        image: dpage/pgadmin4
+        image: dpage/pgadmin4:7
         restart: always
         environment:
             PGADMIN_DEFAULT_EMAIL: admin@admin.com
             PGADMIN_DEFAULT_PASSWORD: admin
         ports:
-            - "10001:80"
+            - "10003:80"

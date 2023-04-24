@@ -1,9 +1,37 @@
 # Semana 1
 
 ### ¿Cómo ejecutar Docker?
+
+Primero crear y ejecutar la imagen de docker
 ```bash
-docker-compose up
+sudo docker-compose up --build
 ```
+
+Buscar la IP interna de la base de datos Postgres
+```bash
+# Windows
+docker inspect pgadmin4 -f “{{json .NetworkSettings.Networks }}”
+docker inspect postgres_db -f “{{json .NetworkSettings.Networks }}”
+
+# Linux
+docker inspect pgadmin4 | grep IPAddress
+docker inspect postgres_db | grep IPAddress
+```
+
+En mi caso el output fue:
+```bash
+# Linux
+# pgadmin4 --> 172.19.0.2
+# postgres_db --> 172.19.0.3
+```
+
+Ingresar en la página de [PG Admin 4](http://127.0.0.1:10003/), con el user: **admin@admin.com** y contraseña: **admin**.
+Luego click en **Agregar un Nuevo Servidor**
+
+
+### Links:
+- [Jupyter - Pyspark](http://127.0.0.1:8888/)
+- [PG Admin 4](http://127.0.0.1:10003/)
 
 ### Ejercicios Python:
 1. Escribir un programa que lea un número impar por teclado. Si el usuario no introduce un número impar, debe repetirse el proceso hasta que lo introduzca correctamente.
