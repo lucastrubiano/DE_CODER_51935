@@ -28,6 +28,12 @@ En mi caso el output fue:
 Ingresar en la página de [PG Admin 4](http://127.0.0.1:10003/), con el user: **admin@admin.com** y contraseña: **admin**.
 Luego click en **Agregar un Nuevo Servidor**
 
+Por cualquier problema reiniciar el servicio de Docker y parar los containers:
+```bash
+sudo systemctl restart docker.socket docker.service
+docker container ls
+docker rm -f <container id>
+```
 
 ### Links:
 - [Jupyter - Pyspark](http://127.0.0.1:8888/)
