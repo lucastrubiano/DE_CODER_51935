@@ -51,7 +51,7 @@ sudo docker-compose up --build
 ### Buscar la IP interna de la base de datos Postgres
 ```bash
 # Windows
-docker inspect postgres_db -f “{{json .NetworkSettings.Networks }}”
+docker inspect postgres_db | findstr IPAddress
 
 # Linux
 docker inspect postgres_db | grep IPAddress
