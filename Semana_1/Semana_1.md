@@ -12,6 +12,10 @@
 * Instalar Docker Desktop
 * Instalar WSL2 (Windows Subsystem for Linux)
 
+
+### Crear carpetas para postgres:
+* Crear la carpeta **postgres_data** en la ruta **Semana_1/docker_shared_folder/postgres_data**.
+
 ### Configurar WSL2:
 * Crear archivo de configuración de WSL2 (**.wslconfig**) en la ruta (**C:\Users\\{username}\\.wslconfig**) con el siguiente contenido:
 ```bash
@@ -53,24 +57,6 @@ docker inspect postgres_db -f “{{json .NetworkSettings.Networks }}”
 docker inspect postgres_db | grep IPAddress
 ```
 
-## Abrir Jupyter Notebook con Pyspark en el navegador:
-1. Ingresar en la página de [Jupyter Notebook](http://127.0.0.1:8888/lab?token=7dd5840a94ba553eef12d2c268a2b99cbbf0f712ae50ecd5), con el token que nos da la app.
-2. Abrir el archivo **ejercicios_python.ipynb**.
-
-## Conexion DBeaver con Postgres DB:
-1. Descargar e instalar [DBeaver](https://dbeaver.io/download/)
-2. Crear una nueva conexión con los siguientes datos:
-    - Host: **localhost**
-    - Port: **10002**
-    - Database: **postgres**
-    - User: **postgres**
-    - Password: **postgres**
-3. Click en **Test Connection** y luego en **Finish**.
-
-## Conexion de Pyspark con Postgres DB:
-1. Abrir el archivo **ejercicios_sql.ipynb**.
-2. Ejecutar la celda de código que contiene la conexión con la base de datos.
-
 ### En mi caso el output fue:
 ```bash
 # Windows
@@ -79,6 +65,7 @@ docker inspect postgres_db | grep IPAddress
 # Linux
 # postgres_db --> 172.19.0.3
 ```
+> Esto sirve para cuando queramos hacer la conexión interna entre Pyspark y Postgres.
 
 <!-- Ingresar en la página de [PG Admin 4](http://127.0.0.1:10003/), con el user: **admin@admin.com** y contraseña: **admin**.
 Luego click en **Agregar un Nuevo Servidor** -->
@@ -104,8 +91,9 @@ docker rm -f <container id>
 5. Escribir un programa que sume todos los números enteros impares desde el 0 hasta el 100.
 6. Contar cuantas veces aparece un elemento en una lista.
 
-# Soluciones Python:
-Para ejecutar las soluciones de los ejercicios y realizar pruebas, se debe abrir el archivo **ejercicios_python_jupyter.ipynb** en [Jupyter Notebook]( http://127.0.0.1:8888/lab?token=coder).
+## Conexion con Jupyter Notebook:
+
+Para ejecutar las soluciones de los ejercicios y realizar pruebas, se debe abrir el archivo **ejercicios_python_jupyter.ipynb** en [Jupyter Notebook]( http://127.0.0.1:10003/lab?token=coder).
 
 
 
@@ -115,3 +103,19 @@ Para ejecutar las soluciones de los ejercicios y realizar pruebas, se debe abrir
 3. Escriba una consulta que devuelva el ID del cliente, su nombre y una columna  Mayor30 que contenga "Sí "si el cliente tiene más de 30 años y "No" en caso contrario.
 4. Escriba una consulta que devuelva todas las llamadas realizadas a clientes de la profesión de ingeniería y muestre si son mayores o menores de 30, así como si terminaron comprando el producto de esa llamada.
 5. Escriba dos consultas: una que calcule las ventas totales y las llamadas totales realizadas a los clientes de la profesión de ingeniería y otra que calcule las mismas métricas para toda la base de clientes.
+
+## Conexion DBeaver con Postgres DB:
+1. Descargar e instalar [DBeaver](https://dbeaver.io/download/)
+2. Crear una nueva conexión con los siguientes datos en DBeaver:
+    - Host: **127.0.0.1** o **localhost** (es lo mismo cualquiera de estos dos).
+    - Port: **10002**
+    - Database: **postgres**
+    - User: **postgres**
+    - Password: **postgres**
+3. Click en **Test Connection** y luego en **Finish**.
+4. Primero hay que crear las tablas y migrar los datos. Esto se hace sólo la primera vez que se ejecuta el docker-compose.
+5. Los script para las migraciones están en la carpeta **Semana_1/docker_shared_folder/working_dir/data/** y son:
+    - **agents_migration.sql**
+    - **calls_migration.sql**
+    - **customers_migration.sql**
+4. Abrir el script **ejercicio_sql_dbeaver.sql** con la conexión creada en DBeaver. Y ejecutar el script.

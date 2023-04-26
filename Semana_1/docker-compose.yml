@@ -4,13 +4,15 @@ version: '3'
 services:
     pyspark:
         image: jupyter/pyspark-notebook:2023-04-24
-        # build:
-        # # build from Dockerfile
-        #   context: ./Path
-        #   dockerfile: Dockerfile
+
+        # limit the memory and cpu usage
+        mem_limit: 512m
+        mem_reservation: 128M
+        cpus: 0.5
+
         container_name: pyspark
         ports:
-            - "8888:8888"
+            - "10003:8888"
         volumes:
             - ./docker_shared_folder/working_dir:/home/coder/working_dir
             # - ./docker_shared_folder/secrets:/etc/secrets
@@ -29,10 +31,14 @@ services:
         container_name: postgres_db
         # Official Postgres image from DockerHub (we use the last version)
         image: 'postgres:13'
+
+        # limit the memory and cpu usage
+        mem_limit: 512m
+        mem_reservation: 128M
+        cpus: 0.5
         
         volumes:
-            #- postgres_data:/var/lib/postgresql/data/
-            - ./docker_shared_folder/postgres/data:/var/lib/postgresql/data
+            - ./docker_shared_folder/postgres_data:/var/lib/postgresql/data
 
         # By default, a Postgres database is running on the 5432 port.
         # If we want to access the database from our computer (outside the container),
