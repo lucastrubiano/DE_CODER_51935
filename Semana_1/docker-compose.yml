@@ -32,7 +32,7 @@ services:
         
         volumes:
             #- postgres_data:/var/lib/postgresql/data/
-            - ./postgres/data:/var/lib/postgresql/data
+            - ./docker_shared_folder/postgres/data:/var/lib/postgresql/data
 
         # By default, a Postgres database is running on the 5432 port.
         # If we want to access the database from our computer (outside the container),
