@@ -12,17 +12,18 @@ services:
         ports:
             - "8888:8888"
         volumes:
-            - ./docker_shared_folder/working_dir:/home/lucas/working_dir
+            - ./docker_shared_folder/working_dir:/home/coder/working_dir
             # - ./docker_shared_folder/secrets:/etc/secrets
         user: root
-        working_dir: /home/lucas/working_dir
+        working_dir: /home/coder/working_dir
         environment:
             JUPYTER_ENABLE_LAB: '1' 
-            NB_USER: lucas
+            JUPYTER_TOKEN: 'coder'
+            NB_USER: coder
             NB_GID: 1000
             CHOWN_HOME: 'yes'
             CHOWN_HOME_OPTS: '-R'
-            SPARK_CLASSPATH: '/home/lucas/working_dir/driver_jdbc/postgresql-42.2.27.jre7.jar'
+            SPARK_CLASSPATH: '/home/coder/working_dir/driver_jdbc/postgresql-42.2.27.jre7.jar'
 
     postgres:
         container_name: postgres_db

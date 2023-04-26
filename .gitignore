@@ -1,6 +1,6 @@
 Semana_1/postgres/data/*
-Semana_1/docker_shared_folder/working_dir/.ipynb_checkpoints/*
-Semana_1/docker_shared_folder/working_dir/.ipynb_checkpoints/pyspark_postgres_connection-checkpoint.ipynb
+Semana_1/docker_shared_folder/working_dir/.ipynb_checkpoints
+Semana_1/docker_shared_folder/working_dir/data/.ipynb_checkpoints
 
 Semana_2/*
 Semana_3/*

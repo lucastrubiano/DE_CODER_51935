@@ -2,7 +2,7 @@
 
 ## Arquitectura del Docker-Compose
 
-![Arquitectura](./images/Arquitectura.png)
+![Arquitectura](./images/arquitectura.png)
 
 ## ¿Cómo configurar y ejecutar Docker?
 
@@ -103,6 +103,11 @@ docker rm -f <container id>
 4. Dadas dos listas (las que se quiera crear), generar una tercera con los elementos que estén presentes en AMBAS listas. Retornar esta nueva lista pero sin elementos duplicados.
 5. Escribir un programa que sume todos los números enteros impares desde el 0 hasta el 100.
 6. Contar cuantas veces aparece un elemento en una lista.
+
+# Soluciones Python:
+Para ejecutar las soluciones de los ejercicios y realizar pruebas, se debe abrir el archivo **ejercicios_python_jupyter.ipynb** en [Jupyter Notebook]( http://127.0.0.1:8888/lab?token=coder).
+
+
 
 # Ejercicios SQL
 1. Extraer agentes cuyo nombre empiezen por M o terminen en O.
