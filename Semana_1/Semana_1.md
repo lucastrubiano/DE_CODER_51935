@@ -119,3 +119,19 @@ Para ejecutar las soluciones de los ejercicios y realizar pruebas, se debe abrir
     - **calls_migration.sql**
     - **customers_migration.sql**
 4. Abrir el script **ejercicio_sql_dbeaver.sql** con la conexión creada en DBeaver. Y ejecutar el script.
+
+# Mini desafio
+
+Tenemos un aplicativo llamado **CoderReport** que se encarga de generar reportes de los alumnos que cursan en **CoderHouse**. Estos reportes de vez en cuando se generan de forma erronea debido a **alumnos que no existen o que no estan activos en el sistema**. Por lo tanto, necesitamos obtener unas metricas para saber que tan grave es este problema y si es necesario tomar alguna medida al respecto.
+
+Para esto se pide lo siguiente:
+* Analizar las ejecuciones de los reportes del mes de Marzo de 2023.
+* De las ejecuciones obtener las que fueron correctas y las que fallaron. No las que están planificadas.
+* Agrupar por curso, la cantidad de ejecuciones correctas y fallidas. Y el promedio de tiempo de ejecución de cada una (correctas e incorrectas).
+
+Para esto se tienen las siguientes tablas con los siguientes campos:
+- **courses**: id, name
+- **reports**: id, course_id, status, total_students, active_students, execution_time, created_at
+- **reports_status**: id, name
+
+> **Nota:** Los datos de las tablas son ficticios y no representan la realidad.
