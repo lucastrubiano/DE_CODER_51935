@@ -6,24 +6,26 @@
 
 ## ¿Cómo configurar y ejecutar Docker?
 
-### Requerimientos:
+### **Requerimientos:**
 * Instalar Docker
 * Instalar Docker Compose
 * Instalar Docker Desktop
 * Instalar WSL2 (Windows Subsystem for Linux)
 
 
-### Crear carpetas para postgres:
+### **Crear carpetas para postgres:**
 * Crear la carpeta **postgres_data** en la ruta **Semana_1/docker_shared_folder/postgres_data**.
+> Sin este paso es muy probable que la imagen de Postgres no se cree correctamente. **Atención!**
 
-### Configurar WSL2:
+### **Configurar recursos del WSL2:**
+> WSL2 es una capa de compatibilidad para ejecutar Linux en Windows. Es necesario para poder ejecutar Docker en Windows. Y para que Docker no consuma demasiados recursos de la máquina, se debe configurar la cantidad de memoria RAM y procesadores que puede utilizar. Para esto, se debe crear un archivo de configuración de WSL2.
 * Crear archivo de configuración de WSL2 (**.wslconfig**) en la ruta (**C:\Users\\{username}\\.wslconfig**) con el siguiente contenido:
 ```bash
 [wsl2]
 processors=1
 memory=2GB
 ```
-* Esto es para que docker no consuma demasiados recursos de la máquina, ya que por defecto consume 4GB de RAM y 2 procesadores.
+* Esto es para que la maquina de Linux que corre Docker no consuma demasiados recursos de la máquina, ya que por defecto consume 4GB de RAM y 2 procesadores.
 * Al aplicar esta configuración, se debe reiniciar la máquina.
 ```bash
 wsl --shutdown
@@ -39,7 +41,18 @@ localhostForwarding=true
 ``` -->
 
 
-### Crear y ejecutar la imagen de docker:
+### **Crear las imagenes y ejecutar el container de docker:**
+Lo primero que hay que hacer para poder crear la imagen y luego ejecutar el container, es movernos por consola (con el comando `cd`) al directorio donde se encuentra el archivo **docker-compose.yml**.
+```bash
+# Windows
+cd C:\\{...relative_path}\dateng_coder\Semana_1
+
+# Linux
+cd {...relative_path}/dateng_coder/Semana_1
+```
+
+Luego ejecutar el siguiente comando:
+
 ```bash
 # Windows
 docker-compose up --build
@@ -48,7 +61,12 @@ docker-compose up --build
 sudo docker-compose up --build
 ```
 
-### Buscar la IP interna de la base de datos Postgres
+> El comando `--build` es para que se construya la imagen de docker y luego se ejecute el container.
+> Si recibe un error `no configuration file provided: not found`, es porque no se encuentran en el directorio correcto. Deben estar en el directorio donde se encuentra el archivo **docker-compose.yml** dentro de la carpeta **Semana_1**.
+> **Sólo para Linux**: Si recibe un error de permisos o que no está iniciado el Docker Daemon, es porque no se está ejecutando el comando con permisos de administrador. En ese caso, ejecutar el comando con `sudo`.
+
+### **Buscar la IP interna de la base de datos Postgres**
+Cuando queramos hacer la conexión entre Pyspark y Postgres, necesitamos saber la IP interna de la base de datos Postgres. Para esto, ejecutar el siguiente comando:
 ```bash
 # Windows
 docker inspect postgres_db | findstr IPAddress
