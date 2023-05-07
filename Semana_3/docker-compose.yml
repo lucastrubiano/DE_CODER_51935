@@ -27,8 +27,6 @@ services:
             CHOWN_HOME_OPTS: '-R'
             SPARK_CLASSPATH: '/home/coder/working_dir/driver_jdbc/postgresql-42.2.27.jre7.jar'
 
-
-
     postgres:
         container_name: postgres_db
         # Official Postgres image from DockerHub (we use the last version)

@@ -6,9 +6,11 @@ Ejemplo en vivo de la clase de la semana 2.
 2. Ejecutar la imagen de postgres db:
 ```bash
 # Windows
+cd C:\\{...relative_path}\dateng_coder\Semana_2
 docker-compose up postgres_db
 
 # Linux
+cd {...relative_path}/dateng_coder/Semana_2
 sudo docker-compose up postgres_db
 ```
 
