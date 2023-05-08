@@ -4,6 +4,10 @@ Semana_1/docker_shared_folder/working_dir/data/.ipynb_checkpoints
 
 # Semana_2/*
 # Semana_3/
+Semana_3/docker_shared_folder/hdfs/datanode/*
+Semana_3/docker_shared_folder/hdfs/namenode/*
+Semana_3/docker_shared_folder/postgres_data/*
+Semana_3/docker_shared_folder/metastore-postgresql/postgresql/data/*
 Semana_4/*
 Semana_5/*
 Semana_6/*
