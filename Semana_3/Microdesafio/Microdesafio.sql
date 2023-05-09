@@ -8,7 +8,7 @@ GO
 CREATE SCHEMA articulos AUTHORIZATION dbo;
 GO
 
--- 3. crear tabla titulso
+-- 3. crear tabla titulos
 CREATE TABLE articulos.titulos
 (titulo_id char(6) NOT NULL,
 titulo varchar(80) NOT NULL,
