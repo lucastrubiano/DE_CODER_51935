@@ -2,66 +2,173 @@
 version: '3'
 
 services:
-    pyspark:
-        image: jupyter/pyspark-notebook:2023-04-24
 
-        # limit the memory and cpu usage
-        mem_limit: 512m
-        mem_reservation: 128M
-        cpus: 0.5
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
+    container_name: namenode
+    volumes:
+      - ./docker_shared_folder/hdfs/namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - ./docker_shared_folder/hadoop-hive.env
+    ports:
+      - "50070:50070"
+    networks:
+      coder_net:
+        ipv4_address: 172.27.1.2
+  
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
+    container_name: datanode
+    volumes:
+      - ./docker_shared_folder/hdfs/datanode:/hadoop/dfs/data
+      # - ./bank:/bank
+    env_file:
+      - ./docker_shared_folder/hadoop-hive.env
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070"
+    depends_on:
+      - namenode
+    ports:
+      - "50075:50075"
+    networks:
+      coder_net:
+        ipv4_address: 172.27.1.3
 
-        container_name: pyspark
-        ports:
-            - "10003:8888"
-        volumes:
-            - ./docker_shared_folder/working_dir:/home/coder/working_dir
-            # - ./docker_shared_folder/secrets:/etc/secrets
-        user: root
-        working_dir: /home/coder/working_dir
-        environment:
-            JUPYTER_ENABLE_LAB: '1' 
-            JUPYTER_TOKEN: 'coder'
-            NB_USER: coder
-            NB_GID: 1000
-            CHOWN_HOME: 'yes'
-            CHOWN_HOME_OPTS: '-R'
-            SPARK_CLASSPATH: '/home/coder/working_dir/driver_jdbc/postgresql-42.2.27.jre7.jar'
+  hive-metastore-postgresql:
+    image: bde2020/hive-metastore-postgresql:2.3.0
+    container_name: hive-metastore-postgresql
+    depends_on:
+      - datanode
+    networks:
+      coder_net:
+        ipv4_address: 172.27.1.4
+  
+  hive-metastore:
+    image: bde2020/hive:2.3.2-postgresql-metastore
+    container_name: hive-metastore
+    env_file:
+      - ./docker_shared_folder/hadoop-hive.env
+    command: /opt/hive/bin/hive --service metastore
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070 datanode:50075 hive-metastore-postgresql:5432"
+    ports:
+      - "9083:9083"
+    depends_on:
+      - hive-metastore-postgresql
+    networks:
+      coder_net:
+        ipv4_address: 172.27.1.5
 
-    postgres:
-        container_name: postgres_db
-        # Official Postgres image from DockerHub (we use the last version)
-        image: 'postgres:13'
+  hive-server:
+    image: bde2020/hive:2.3.2-postgresql-metastore
+    container_name: hive-server
+    env_file:
+      - ./docker_shared_folder/hadoop-hive.env
+    environment:
+      HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://hive-metastore/metastore"
+      SERVICE_PRECONDITION: "hive-metastore:9083"
+    ports:
+      - "10000:10000"
+    depends_on:
+      - hive-metastore
+    networks:
+      coder_net:
+        ipv4_address: 172.27.1.10
 
-        # limit the memory and cpu usage
-        mem_limit: 512m
-        mem_reservation: 128M
-        cpus: 0.5
-        
-        volumes:
-            - ./docker_shared_folder/postgres_data:/var/lib/postgresql/data
+  database:
+    image: postgres:15
+    container_name: database
+    ports:
+      - "10001:5432"
+    environment:
+      - POSTGRES_DB=hue # The PostgreSQL default database (automatically created at first launch)
+      - POSTGRES_USER=hue # The PostgreSQL user (useful to connect to the database)
+      - POSTGRES_PASSWORD=hue # The PostgreSQL password (useful to connect to the database)
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+    volumes:
+      - ./docker_shared_folder/postgres_data:/var/lib/postgresql/data
+    networks:
+      coder_net:
+        ipv4_address: 172.27.1.11
 
-        # By default, a Postgres database is running on the 5432 port.
-        # If we want to access the database from our computer (outside the container),
-        # we must share the port with our computer's port.
-        # The syntax is [port we want on our machine]:[port we want to retrieve in the container]
-        # Note: You are free to change your computer's port,
-        # but take into consideration that it will change the way
-        # you are connecting to your database.
-        ports:
-            - 10002:5432
+  hue:
+    image: gethue/hue:20230505-140101
+    hostname: hue
+    container_name: hue
+    dns: 8.8.8.8
+    ports:
+      - "10002:8888"
+    volumes:
+      - ./docker_shared_folder/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+    depends_on:
+      - database
+    networks:
+      coder_net:
+        ipv4_address: 172.27.1.12
 
-        environment:
-            - POSTGRES_DB=postgres # The PostgreSQL default database (automatically created at first launch)
-            - POSTGRES_USER=postgres # The PostgreSQL user (useful to connect to the database)
-            - POSTGRES_PASSWORD=postgres # The PostgreSQL password (useful to connect to the database)
-            - "POSTGRES_HOST_AUTH_METHOD=trust"
-    
-    # pgadmin:
-    #     container_name: pgadmin4
-    #     image: dpage/pgadmin4:7
-    #     restart: always
-    #     environment:
-    #         PGADMIN_DEFAULT_EMAIL: admin@admin.com
-    #         PGADMIN_DEFAULT_PASSWORD: admin
-    #     ports:
-    #         - "10003:80"
+#   spark-master:
+#     image: bde2020/spark-master:2.4.0-hadoop2.7
+#     container_name: spark-master
+#     ports:
+#       - 8080:8080
+#       - 7077:7077
+#     environment:
+#       - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
+#     env_file:
+#       - ./hadoop-hive.env
+#     networks:
+#       coder_net:
+#         ipv4_address: 172.27.1.13
+     
+#   spark-worker:
+#     image: bde2020/spark-worker:2.4.0-hadoop2.7
+#     container_name: spark-worker
+#     depends_on:
+#       - spark-master
+#     environment:
+#       - SPARK_MASTER=spark://spark-master:7077
+#       - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
+#       - HIVE_CORE_CONF_javax_jdo_option_ConnectionURL=jdbc:postgresql://hive-metastore/metastore
+#     depends_on:
+#       - spark-master
+#     ports:
+#       - 8081:8081
+#     env_file:
+#       - ./hadoop-hive.env
+#     networks:
+#       coder_net:
+#         ipv4_address: 172.27.1.14
+
+  mongo:
+    image: mongo:6
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      coder_net:
+        ipv4_address: 172.27.1.15
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    networks:
+      coder_net:
+        ipv4_address: 172.27.1.16
+
+networks:
+  coder_net: # Name of the network
+    ipam: # IP Address Management
+      driver: default
+      config:
+        - subnet: 172.27.0.0/16 # Subnet
+        # 172.17.0.0 is the default subnet for docker
+        # 16 is the number of bits used for the network

@@ -16,11 +16,11 @@ Drop table dbo.sales
 Select ID,Description
 From dbo.sales
 -- INSERT
-Insert into dbo.sales values(1,’HP Product’,3,1233)
+Insert into dbo.sales values(1,'HP Product',3,1233)
 -- UPDATE
 UPDATE dbo.sales
-SET Description=’HP Product v2’
-Where Description =’HP Product’
+SET Description='HP Product v2'
+Where Description ='HP Product'
 -- DELETE
 DELETE FROM dbo.sales
 Where ID=1
