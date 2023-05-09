@@ -6,7 +6,8 @@ Repositorio modificado por **Profesor Lucas Trubiano** para la comisión 51935 y
 
 ### Semanas:
 - [Semana 1](Semana_1/Semana_1.md)
-- [Semana 2](Semana_1/Semana_2.md)
+- [Semana 2](Semana_2/Semana_2.md)
+- [Semana 3](Semana_3/Semana_3.md)
 
 
 ---
