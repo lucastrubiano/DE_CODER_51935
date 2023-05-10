@@ -3,16 +3,30 @@ version: '3'
 
 services:
 
+  # Anduvo pero no se que user tiene?
+  # sql_server:
+  #   container_name: sql_server
+  #   image: mcr.microsoft.com/mssql/server:2019-latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - "1433:1433"
+  #   command: -e "ACCEPT_EULA=Y"
+  #   networks:
+  #     coder_net:
+  #       ipv4_address: 172.30.1.11
+  # docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=1234" -p 1433:1433 --name sql1 --hostname sql1 -d mcr.microsoft.com/mssql/server:2019-latest
+  # mssql sera este el user?
+
   postgres:
     container_name: postgres
     # Official Postgres image from DockerHub (we use the last version)
-    image: 'postgres:13'
+    image: 'postgres:15'
     # limit the memory and cpu usage
     # mem_limit: 512m
     # mem_reservation: 128M
     # cpus: 0.5
     volumes:
-      - ./docker_shared_folder/postgres_data:/var/lib/postgresql/data
+      - ./docker_shared_folder/postgres_data_1:/var/lib/postgresql/data
     # By default, a Postgres database is running on the 5432 port.
     # If we want to access the database from our computer (outside the container),
     # we must share the port with our computer's port.
@@ -33,14 +47,17 @@ services:
         ipv4_address: 172.30.1.1
 
   pgadmin:
-      container_name: pgadmin4
-      image: dpage/pgadmin4:7
-      restart: always
-      environment:
-          PGADMIN_DEFAULT_EMAIL: admin@admin.com
-          PGADMIN_DEFAULT_PASSWORD: admin
-      ports:
-          - "10080:80"
+    container_name: pgadmin4
+    image: dpage/pgadmin4:7
+    restart: unless-stopped
+    environment:
+        PGADMIN_DEFAULT_EMAIL: admin@admin.com
+        PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+        - "10080:80"
+    networks:
+      coder_net:
+        ipv4_address: 172.30.1.2
 
   mongo:
     image: mongo:4.4.21
@@ -55,7 +72,7 @@ services:
       - ./docker_shared_folder/mongo_data:/data/db
     networks:
       coder_net:
-        ipv4_address: 172.30.1.2
+        ipv4_address: 172.30.1.3
 
   mongo-express:
     image: mongo-express:0.54
@@ -71,7 +88,7 @@ services:
       - mongo
     networks:
       coder_net:
-        ipv4_address: 172.30.1.3
+        ipv4_address: 172.30.1.4
   
 networks:
   coder_net: # Name of the network
