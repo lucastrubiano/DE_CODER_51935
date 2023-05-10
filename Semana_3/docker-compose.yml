@@ -26,7 +26,7 @@ services:
     # mem_reservation: 128M
     # cpus: 0.5
     volumes:
-      - ./docker_shared_folder/postgres_data_1:/var/lib/postgresql/data
+      - ./docker_shared_folder/postgres_data:/var/lib/postgresql/data
     # By default, a Postgres database is running on the 5432 port.
     # If we want to access the database from our computer (outside the container),
     # we must share the port with our computer's port.
