@@ -2,68 +2,67 @@
 version: '3'
 
 services:
-    pyspark:
-        image: jupyter/pyspark-notebook:2023-04-24
 
-        # limit the memory and cpu usage
-        mem_limit: 512m
-        mem_reservation: 128M
-        cpus: 0.5
+  pyspark:
+    image: jupyter/pyspark-notebook:2023-04-24
+    # limit the memory and cpu usage
+    # mem_limit: 512m
+    # mem_reservation: 128M
+    # cpus: 0.5
+    container_name: pyspark
+    ports:
+      - "10003:8888"
+    volumes:
+      - ./docker_shared_folder/working_dir:/home/coder/working_dir
+      # - ./docker_shared_folder/secrets:/etc/secrets
+    user: root
+    working_dir: /home/coder/working_dir
+    environment:
+      JUPYTER_ENABLE_LAB: '1' 
+      JUPYTER_TOKEN: 'coder'
+      NB_USER: coder
+      NB_GID: 1000
+      CHOWN_HOME: 'yes'
+      CHOWN_HOME_OPTS: '-R'
+      SPARK_CLASSPATH: '/home/coder/working_dir/driver_jdbc/postgresql-42.2.27.jre7.jar'
+    networks:
+      sem_1_net:
+        ipv4_address: 171.1.1.1
 
-        container_name: pyspark
-        ports:
-            - "10003:8888"
-        volumes:
-            - ./docker_shared_folder/working_dir:/home/coder/working_dir
-            # - ./docker_shared_folder/secrets:/etc/secrets
-        user: root
-        working_dir: /home/coder/working_dir
-        environment:
-            JUPYTER_ENABLE_LAB: '1' 
-            JUPYTER_TOKEN: 'coder'
-            NB_USER: coder
-            NB_GID: 1000
-            CHOWN_HOME: 'yes'
-            CHOWN_HOME_OPTS: '-R'
-            SPARK_CLASSPATH: '/home/coder/working_dir/driver_jdbc/postgresql-42.2.27.jre7.jar'
+  postgres:
+    container_name: postgres_db
+    # Official Postgres image from DockerHub (we use the last version)
+    image: 'postgres:13'
+    # limit the memory and cpu usage
+    # mem_limit: 512m
+    # mem_reservation: 128M
+    # cpus: 0.5
+    volumes:
+      - ./docker_shared_folder/postgres_data:/var/lib/postgresql/data
+    # By default, a Postgres database is running on the 5432 port.
+    # If we want to access the database from our computer (outside the container),
+    # we must share the port with our computer's port.
+    # The syntax is [port we want on our machine]:[port we want to retrieve in the container]
+    # Note: You are free to change your computer's port,
+    # but take into consideration that it will change the way
+    # you are connecting to your database.
+    ports:
+      - 10002:5432
+    environment:
+      - POSTGRES_DB=postgres # The PostgreSQL default database (automatically created at first launch)
+      - POSTGRES_USER=postgres # The PostgreSQL user (useful to connect to the database)
+      - POSTGRES_PASSWORD=postgres # The PostgreSQL password (useful to connect to the database)
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+    networks:
+      sem_1_net:
+        ipv4_address: 171.1.1.2
 
 
-
-    postgres:
-        container_name: postgres_db
-        # Official Postgres image from DockerHub (we use the last version)
-        image: 'postgres:13'
-
-        # limit the memory and cpu usage
-        mem_limit: 512m
-        mem_reservation: 128M
-        cpus: 0.5
-        
-        volumes:
-            - ./docker_shared_folder/postgres_data:/var/lib/postgresql/data
-
-        # By default, a Postgres database is running on the 5432 port.
-        # If we want to access the database from our computer (outside the container),
-        # we must share the port with our computer's port.
-        # The syntax is [port we want on our machine]:[port we want to retrieve in the container]
-        # Note: You are free to change your computer's port,
-        # but take into consideration that it will change the way
-        # you are connecting to your database.
-        ports:
-            - 10002:5432
-
-        environment:
-            - POSTGRES_DB=postgres # The PostgreSQL default database (automatically created at first launch)
-            - POSTGRES_USER=postgres # The PostgreSQL user (useful to connect to the database)
-            - POSTGRES_PASSWORD=postgres # The PostgreSQL password (useful to connect to the database)
-            - "POSTGRES_HOST_AUTH_METHOD=trust"
-    
-    # pgadmin:
-    #     container_name: pgadmin4
-    #     image: dpage/pgadmin4:7
-    #     restart: always
-    #     environment:
-    #         PGADMIN_DEFAULT_EMAIL: admin@admin.com
-    #         PGADMIN_DEFAULT_PASSWORD: admin
-    #     ports:
-    #         - "10003:80"
+networks:
+  sem_1_net: # Name of the network
+    ipam: # IP Address Management
+      driver: default
+      config:
+        - subnet: 171.1.1.0/16 # Subnet
+        # 171.1.1.0 is the default subnet for docker
+        # 16 is the number of bits used for the network
