@@ -46,19 +46,6 @@ services:
       coder_net:
         ipv4_address: 172.30.1.1
 
-  pgadmin:
-    container_name: pgadmin4
-    image: dpage/pgadmin4:7
-    restart: unless-stopped
-    environment:
-        PGADMIN_DEFAULT_EMAIL: admin@admin.com
-        PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-        - "10080:80"
-    networks:
-      coder_net:
-        ipv4_address: 172.30.1.2
-
   mongo:
     image: mongo:4.4.21
     restart: unless-stopped
