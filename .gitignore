@@ -8,7 +8,7 @@ Semana_1/docker_shared_folder/working_dir/data/.ipynb_checkpoints
 Semana_3/docker_shared_folder/mongo_data/*
 Semana_3/docker_shared_folder/postgres_data/*
 
-Semana_4/*
+# Semana_4/*
 Semana_5/*
 Semana_6/*
 Semana_7/*
@@ -19,3 +19,4 @@ Semana_11/*
 Proyecto_Final/*
 
 docker_bigdata/*
+Semana_4/docker_shared_folder/working_dir/.ipynb_checkpoints/etl-checkpoint.ipynb
