@@ -177,7 +177,7 @@ show collections;
 -- Insertar datos
 db.clientes.insert({nombres:"Lucas", apellido:"Trubiano"});
 db.clientes.insert({nombres:"Fernando", apellido:"Pareja"});
-db.clientes.insert({nombres:"Juan", apellido:"Perez"});
+db.clientes.insert({nombres:"Lautaro", apellido:"Odoni"});
 
 -- Ver registros de coleccion
 db.clientes.find();
@@ -192,7 +192,7 @@ db.clientes.find({nombres:"Lucas"});
 db.clientes.update({nombres:"Lucas"},{$set:{apellido:"Coder"}});
 
 -- Eliminar registros de coleccion
-db.clientes.remove({nombres:"Juan"});
+db.clientes.remove({nombres:"Julio"});
 ```
 
 <br>
