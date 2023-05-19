@@ -1,6 +1,6 @@
 # Data-Engineering-Flex
 
-Repositorio modificado por **Profesor Lucas Trubiano** para la comisión 51935 y 51940 (DE Flex - 2023).
+Copia del repositorio de **Profesor Lucas Trubiano** para la comisión 51935 y 51940 (DE Flex - 2023).
 
 
 
