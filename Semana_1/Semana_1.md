@@ -86,7 +86,8 @@ docker inspect postgres_db | grep IPAddress
 > Esto sirve para cuando queramos hacer la conexión interna entre Pyspark y Postgres.
 
 <!-- Ingresar en la página de [PG Admin 4](http://127.0.0.1:10003/), con el user: **admin@admin.com** y contraseña: **admin**.
-Luego click en **Agregar un Nuevo Servidor** -->
+Luego click en **Agregar un Nuevo Servidor** --> 
+# pass igual a "coder" 
 
 <!-- ### Por cualquier problema, para reiniciar el servicio de Docker y parar los containers:
 ```bash

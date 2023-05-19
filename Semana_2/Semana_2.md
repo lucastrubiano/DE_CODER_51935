@@ -7,8 +7,8 @@ Ejemplo en vivo de la clase de la semana 2.
 ```bash
 # Windows
 cd C:\\{...relative_path}\dateng_coder\Semana_1
-docker-compose up --build postgres_db
-docker-compose up postgres_db
+docker-compose up --build postgres
+docker-compose up postgres
 
 # Linux
 cd {...relative_path}/dateng_coder/Semana_1
