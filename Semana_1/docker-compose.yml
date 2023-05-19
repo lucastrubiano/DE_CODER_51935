@@ -32,7 +32,7 @@ services:
   postgres:
     container_name: postgres_db
     # Official Postgres image from DockerHub (we use the last version)
-    image: 'postgres:13'
+    image: 'postgres:15'
     # limit the memory and cpu usage
     # mem_limit: 512m
     # mem_reservation: 128M

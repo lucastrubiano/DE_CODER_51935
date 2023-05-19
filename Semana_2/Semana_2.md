@@ -7,12 +7,12 @@ Ejemplo en vivo de la clase de la semana 2.
 ```bash
 # Windows
 cd C:\\{...relative_path}\dateng_coder\Semana_1
-docker-compose up --build postgres_db
-docker-compose up postgres_db
+docker-compose up --build
+docker-compose up
 
 # Linux
 cd {...relative_path}/dateng_coder/Semana_1
-sudo docker-compose up postgres_db
+sudo docker-compose up
 ```
 
 3. Abrir dbeaver y crear una conexión a la base de datos postgres_db. (Con la IP necesaria de la base de datos)
