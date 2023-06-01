@@ -5,31 +5,31 @@ version: '3'
 
 services:
 
-  pyspark:
-    image: jupyter/pyspark-notebook:2023-04-24
-    # limit the memory and cpu usage
-    # mem_limit: 512m
-    # mem_reservation: 128M
-    # cpus: 0.5
-    container_name: sem4-pyspark
-    ports:
-      - "8888:8888"
-    volumes:
-      - ./docker_shared_folder/working_dir:/home/coder/working_dir
-      # - ./docker_shared_folder/secrets:/etc/secrets
-    user: root
-    working_dir: /home/coder/working_dir
-    environment:
-      JUPYTER_ENABLE_LAB: '1' 
-      JUPYTER_TOKEN: 'coder'
-      NB_USER: coder
-      NB_GID: 1000
-      CHOWN_HOME: 'yes'
-      CHOWN_HOME_OPTS: '-R'
-      SPARK_CLASSPATH: '/home/coder/working_dir/driver_jdbc/postgresql-42.2.27.jre7.jar'
-    networks:
-      sem_4_net:
-        ipv4_address: 171.1.1.1
+  # pyspark:
+  #   image: jupyter/pyspark-notebook:2023-04-24
+  #   # limit the memory and cpu usage
+  #   # mem_limit: 512m
+  #   # mem_reservation: 128M
+  #   # cpus: 0.5
+  #   container_name: sem4-pyspark
+  #   ports:
+  #     - "8888:8888"
+  #   volumes:
+  #     - ./docker_shared_folder/working_dir:/home/coder/working_dir
+  #     # - ./docker_shared_folder/secrets:/etc/secrets
+  #   user: root
+  #   working_dir: /home/coder/working_dir
+  #   environment:
+  #     JUPYTER_ENABLE_LAB: '1' 
+  #     JUPYTER_TOKEN: 'coder'
+  #     NB_USER: coder
+  #     NB_GID: 1000
+  #     CHOWN_HOME: 'yes'
+  #     CHOWN_HOME_OPTS: '-R'
+  #     SPARK_CLASSPATH: '/home/coder/working_dir/driver_jdbc/postgresql-42.2.27.jre7.jar'
+  #   networks:
+  #     sem_4_net:
+  #       ipv4_address: 171.1.1.1
 
   postgres:
     container_name: sem4-postgres_db
