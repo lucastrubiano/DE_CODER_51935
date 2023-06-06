@@ -9,7 +9,7 @@ Semana_3/docker_shared_folder/mongo_data/*
 Semana_3/docker_shared_folder/postgres_data/*
 
 # Semana_4/*
-Semana_4/docker_shared_folder/working_dir/.ipynb_checkpoints/etl-checkpoint.ipynb
+Semana_4/docker_shared_folder/working_dir/.ipynb_checkpoints/*
 
 # Semana_5/*
 Semana_5/databases/AdventureWorks2022.bak
@@ -22,6 +22,8 @@ Semana_6/docker_shared_folder/working_dir/.env
 Semana_6/old/*
 
 # Semana_7/*
+Semana_7/docker_shared_folder/.env
+Semana_7/docker_shared_folder/working_dir/.ipynb_checkpoints/*
 
 Semana_8/*
 
@@ -34,3 +36,9 @@ Semana_11/*
 Proyecto_Final/*
 
 docker_bigdata/*
+Semana_7/docker_shared_folder/working_dir/spark_drivers/spark-redshift_2.10-2.0.0.jar
+Semana_7/docker_shared_folder/working_dir/spark_drivers/spark-avro_2.11-3.0.0.jar
+Semana_7/docker_shared_folder/working_dir/spark_drivers/RedshiftJDBC42-no-awssdk-1.2.36.1060.jar
+Semana_7/docker_shared_folder/working_dir/spark_drivers/RedshiftJDBC41-1.2.12.1017.jar
+Semana_7/docker_shared_folder/working_dir/spark_drivers/minimal-json-0.9.4.jar
+Semana_7/docker_shared_folder/working_dir/spark_drivers/postgresql-42.2.27.jre7.jar

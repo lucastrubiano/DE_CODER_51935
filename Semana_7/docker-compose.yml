@@ -1,0 +1,59 @@
+# docker-compose.yml
+version: '3'
+
+services:
+
+  pyspark:
+    image: jupyter/pyspark-notebook:2023-04-24
+    # limit the memory and cpu usage
+    # mem_limit: 512m
+    # mem_reservation: 128M
+    # cpus: 0.5
+    container_name: sem7-pyspark
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./docker_shared_folder/working_dir:/home/coder/working_dir
+    user: root
+    working_dir: /home/coder/working_dir
+    env_file:
+      - ./docker_shared_folder/.env
+    environment:
+      NB_USER: coder
+      NB_GID: 1000
+      CHOWN_HOME: 'yes'
+      CHOWN_HOME_OPTS: '-R'
+      SPARK_CLASSPATH: '/home/coder/working_dir/driver_jdbc/postgresql-42.5.2.jar'
+    networks:
+      sem_7_net:
+        ipv4_address: 172.7.7.1
+
+  postgres:
+    container_name: sem7-postgres-db
+    # Official Postgres image from DockerHub (we use the last version)
+    image: 'postgres:15'
+    # limit the memory and cpu usage
+    # mem_limit: 512m
+    # mem_reservation: 128M
+    # cpus: 0.5
+    hostname: postgres_sem7
+    volumes:
+      - ./docker_shared_folder/postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5435:5435
+    command: "-p 5435"
+    env_file:
+      - ./docker_shared_folder/.env
+    networks:
+      sem_7_net:
+        ipv4_address: 172.7.7.2
+
+
+networks:
+  sem_7_net: # Name of the network
+    ipam: # IP Address Management
+      driver: default
+      config:
+        - subnet: 172.7.7.0/16 # Subnet
+        # 172.7.7.0 is the default subnet for docker
+        # 16 is the number of bits used for the network
