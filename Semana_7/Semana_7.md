@@ -43,7 +43,7 @@ DRIVER_PATH=/home/coder/working_dir/spark_drivers/postgresql-42.5.2.jar
 Para ejecutar el Docker Compose, desde la carpeta `Semana_7` ejecutar el comando:
 
 ```bash
-docker-compose -f ./Semana_7/docker-compose.yml up --build
+docker-compose up --build
 ```
 
 ## Microdesafío
