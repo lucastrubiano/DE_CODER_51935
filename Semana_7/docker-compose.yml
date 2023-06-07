@@ -23,7 +23,7 @@ services:
       NB_GID: 1000
       CHOWN_HOME: 'yes'
       CHOWN_HOME_OPTS: '-R'
-      SPARK_CLASSPATH: '/home/coder/working_dir/driver_jdbc/postgresql-42.5.2.jar'
+      SPARK_CLASSPATH: '/home/coder/working_dir/spark_drivers/postgresql-42.5.2.jar'
     networks:
       sem_7_net:
         ipv4_address: 172.7.7.1
