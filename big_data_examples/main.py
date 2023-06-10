@@ -24,12 +24,9 @@ def generar_registro(id_dispositivo, fecha):
     presion = random.uniform(800, 1200)
     latitud = random.uniform(-90, 90)
     longitud = random.uniform(-180, 180)
-
-    valores = [FORMATO_ID.format(id_dispositivo), fecha, temperatura, humedad, presion, latitud, longitud]
-
-    valores = [str(valor) for valor in valores]
     
-    return SEPARADOR.join(valores) + '\n'
+    # return SEPARADOR.join(map(lambda x: str(x), valores)) + '\n'
+    return f'{FORMATO_ID.format(id_dispositivo)}|{fecha}|{temperatura}|{humedad}|{presion}|{latitud}|{longitud}\n'
 
 # Función para obtener el número de días de un mes
 def obtener_dias_mes(mes, año):
@@ -71,21 +68,21 @@ for anio in range(2):
         for dia in range(max_dias):
             for hora in range(24):
                 for minuto in range(60):
+                    
                     for segundo in range(60):
                         fecha = datetime(year=anio+ANIO_INICIO, month=mes+MES_INICIO, day=dia+DIA_INICIO, hour=hora, minute=minuto, second=segundo)
                         
                         print("Generando registros para el día: ", fecha)
 
-                        registros = []
                         # Para cada segundo del día, generar un registro para cada dispositivo
-                        for id_dispositivo in range(CANT_DISPOSITIVOS_IOT):
-                            registros.append(generar_registro(id_dispositivo, fecha))
+                        registros = [generar_registro(id_dispositivo, fecha) for id_dispositivo in range(CANT_DISPOSITIVOS_IOT)]
                         
                         print("Escribiendo registros en el archivo")
                         # Escribir un lote de registros en el archivo
                         with open(PATH_ARCHIVO, 'a') as file:
                             file.writelines(registros)
                         
-                        print("Registros escritos en el archivo")
+                        # print("Registros escritos en el archivo")
+                    
 
 print("FIN")
