@@ -28,6 +28,7 @@ En este paso se creó el contenedor de SQL Server 2022 con los siguientes parám
 * user: mssql (usuario de la base de datos)
 * port: 1433 (puerto de la base de datos)
 * db user: SA (usuario de la base de datos para usar en DBeaver)
+* db por defecto: msdb
 
 Crear el directorio de backup y copiar el archivo de backup de la base de datos AdventureWorks2022.bak
 
