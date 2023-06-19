@@ -18,6 +18,8 @@ Semana_5/databases/AdventureWorksDW2022.bak
 # Semana_6/*
 Semana_6/docker_shared_folder/working_dir/.ipynb_checkpoints/*
 Semana_6/docker_shared_folder/working_dir/parte1/.ipynb_checkpoints/*
+Semana_6/docker_shared_folder/working_dir/parte2/.ipynb_checkpoints/*
+Semana_6/docker_shared_folder/working_dir/parte3/.ipynb_checkpoints/*
 Semana_6/docker_shared_folder/working_dir/.env
 Semana_6/old/*
 
@@ -30,9 +32,11 @@ Semana_7/docker_shared_folder/working_dir/spark_drivers/RedshiftJDBC42-no-awssdk
 Semana_7/docker_shared_folder/working_dir/spark_drivers/RedshiftJDBC41-1.2.12.1017.jar
 Semana_7/docker_shared_folder/working_dir/spark_drivers/minimal-json-0.9.4.jar
 Semana_7/docker_shared_folder/working_dir/spark_drivers/postgresql-42.2.27.jre7.jar
+
 Semana_7/docker_shared_folder/working_dir/microdesafio/.ipynb_checkpoints/*
 Semana_7/docker_shared_folder/working_dir/sqlalchemy/.ipynb_checkpoints/*
 Semana_7/docker_shared_folder/working_dir/psycopg2/.ipynb_checkpoints/*
+Semana_7/docker_shared_folder/working_dir/semana_8/.ipynb_checkpoints/*
 
 # Semana_8/*
 
