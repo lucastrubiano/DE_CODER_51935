@@ -37,6 +37,8 @@ Semana_7/docker_shared_folder/working_dir/microdesafio/.ipynb_checkpoints/*
 Semana_7/docker_shared_folder/working_dir/sqlalchemy/.ipynb_checkpoints/*
 Semana_7/docker_shared_folder/working_dir/psycopg2/.ipynb_checkpoints/*
 Semana_7/docker_shared_folder/working_dir/semana_8/.ipynb_checkpoints/*
+Semana_7/docker_shared_folder/working_dir/data/.ipynb_checkpoints/*
+Semana_7/docker_shared_folder/working_dir/texto.log
 
 # Semana_8/*
 
@@ -49,5 +51,4 @@ Semana_11/*
 Proyecto_Final/*
 
 docker_bigdata/*
-Semana_7/docker_shared_folder/working_dir/texto.log
 big_data_examples/data/datos_iot.csv
