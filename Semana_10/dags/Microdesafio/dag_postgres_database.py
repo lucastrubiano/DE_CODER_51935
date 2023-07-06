@@ -5,15 +5,15 @@ from airflow.providers.postgres.operators.postgres import PostgresOperator
 
 default_args={
     'owner': 'DavidBU',
-    'retries':5,
-    'retry_delay': timedelta(minutes=5)
+    'retries':1,
+    'retry_delay': timedelta(minutes=1)
 }
 
 with DAG(
     default_args=default_args,
     dag_id='dag_con_conexion_postgres',
     description= 'Nuestro primer dag usando python Operator',
-    start_date=datetime(2022,9,3),
+    start_date=datetime(2023,6,20),
     schedule_interval='0 0 * * *'
     ) as dag:
     task1= PostgresOperator(
@@ -21,7 +21,7 @@ with DAG(
         postgres_conn_id= 'postgres_localhost',
         sql="""
             create table if not exists fin_mundo(
-                dt date,
+                dt varchar(10),
                 pais varchar(30)
             )
         """
