@@ -1,4 +1,5 @@
 from os import environ as env
+from psycopg2 import connect
 from pyspark.sql import SparkSession
 
 # Variables de configuración de Redshift
@@ -7,7 +8,8 @@ REDSHIFT_PORT = env["REDSHIFT_PORT"]
 REDSHIFT_DB = env["REDSHIFT_DB"]
 REDSHIFT_USER = env["REDSHIFT_USER"]
 REDSHIFT_PASSWORD = env["REDSHIFT_PASSWORD"]
-REDSHIFT_URL = f"jdbc:postgresql://{REDSHIFT_HOST}:{REDSHIFT_PORT}/{REDSHIFT_DB}?user={REDSHIFT_USER}&password={REDSHIFT_PASSWORD}"
+REDSHIFT_URL = env["REDSHIFT_URL"]
+
 
 class ETL_Spark:
     # Path del driver de Postgres para Spark (JDBC) (También sirve para Redshift)
@@ -34,18 +36,9 @@ class ETL_Spark:
             .getOrCreate()
         )
 
-        # try:
-        #     self.conn_postgres = connect(
-        #         host=POSTGRES_HOST,
-        #         port=POSTGRES_PORT,
-        #         database=POSTGRES_DB,
-        #         user=POSTGRES_USER,
-        #         password=POSTGRES_PASSWORD,
-        #     )
-        # except:
-        #     print(">>> [init] No se pudo conectar a Postgres")
-
         try:
+            # Conectar a Redshift
+            print(">>> [init] Conectando a Redshift...")
             self.conn_redshift = connect(
                 host=REDSHIFT_HOST,
                 port=REDSHIFT_PORT,
@@ -53,39 +46,20 @@ class ETL_Spark:
                 user=REDSHIFT_USER,
                 password=REDSHIFT_PASSWORD,
             )
+            self.cur_redshift = self.conn_redshift.cursor()
+            print(">>> [init] Conexión exitosa")
+            # Cerrar la conexión
+            self.cur_redshift.close()
+            self.conn_redshift.close()
         except:
             print(">>> [init] No se pudo conectar a Redshift")
 
-    def execute_create_table(self, table_name, query):
-        """
-        Ejecuta la creación de la tabla en Postgres
-        """
-        print(f">>> [execute_create_table] Creando tabla {table_name} en Postgres...")
-
-        # Crear cursor
-        try:
-            cursor = self.conn_redshift.cursor()
-        except:
-            print(">>> [execute_create_table] No se pudo crear el cursor de Redshift")
-            return
-
-        # Crear tabla
-        try:
-            cursor.execute(query)
-            cursor.commit()
-        except:
-            print(
-                f">>> [execute_create_table] No se pudo crear la tabla {table_name} en Redshift"
-            )
-            print(f">>> [execute_create_table] Query: {self.CREATE_TABLE}")
-            return
-        finally:
-            # Cerrar cursor
-            cursor.close()
-
-    def execute(self):
+    def execute(self, process_date: str):
         """
         Método principal que ejecuta el ETL
+
+        Args:
+            process_date (str): Fecha de proceso en formato YYYY-MM-DD
         """
         print(">>> [execute] Ejecutando ETL...")
 

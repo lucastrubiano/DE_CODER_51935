@@ -135,4 +135,6 @@ services:
       CHOWN_HOME: 'yes'
       CHOWN_HOME_OPTS: '-R'
       SPARK_CLASSPATH: '/home/pyspark/working_dir/driver_jdbc/postgresql-42.5.2.jar'
-      
+    env_file:
+      - ".env"
+    command: python -m pip install psycopg2-binary
