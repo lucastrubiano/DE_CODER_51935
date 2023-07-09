@@ -59,4 +59,5 @@ Semana_11/*
 Proyecto_Final/*
 
 otros/docker_bigdata/*
-big_data_examples/data/datos_iot.csv
+otros/ejemplo_entregable_3/postgres_data/*
+otros/ejemplo_entregable_3/logs/*
