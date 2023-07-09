@@ -15,3 +15,8 @@ class ETL_Users(ETL_Spark):
     def run(self):
         process_date = "2023-07-09" # datetime.now().strftime("%Y-%m-%d")
         self.execute(process_date)
+
+if __name__ == "__main__":
+    print("Corriendo script")
+    etl = ETL_Users()
+    etl.run()

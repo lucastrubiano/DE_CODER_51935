@@ -4,7 +4,6 @@ from airflow import DAG
 
 from airflow.operators.python_operator import PythonOperator
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
-from airflow.operators.bash import BashOperator
 from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 
 
@@ -45,7 +44,7 @@ def get_process_date(**kwargs):
 defaul_args = {
     "owner": "Lucas Trubiano",
     "start_date": datetime(2023, 7, 1),
-    "retries": 1,
+    "retries": 0,
     "retry_delay": timedelta(seconds=5),
 }
 
