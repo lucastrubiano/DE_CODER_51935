@@ -13,12 +13,15 @@ from datetime import datetime, timedelta
 
 QUERY_CREATE_TABLE = """
 CREATE TABLE IF NOT EXISTS users (
-    id INT,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
+    name VARCHAR(70),
+    gender VARCHAR(1),
+    age INT,
+    is_under_20 BOOLEAN,
+    is_over_40 BOOLEAN,
     email VARCHAR(50),
-    process_date DATE distkey
-) SORTKEY(process_date, id);
+    nationality VARCHAR(5),
+    process_date VARCHAR(10) distkey
+) SORTKEY(process_date, nationality);
 """
 
 QUERY_CLEAN_PROCESS_DATE = """
@@ -83,6 +86,7 @@ with DAG(
         application=f'{Variable.get("spark_scripts_dir")}/ETL_Users.py',
         conn_id="spark_default",
         dag=dag,
+        driver_class_path=Variable.get("driver_class_path"),
     )
 
     get_process_date_task >> create_table >> clean_process_date >> spark_etl_users

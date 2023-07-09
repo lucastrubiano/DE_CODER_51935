@@ -22,10 +22,11 @@ class ETL_Spark:
         """
         print(">>> [init] Inicializando ETL...")
 
+        env["SPARK_CLASSPATH"] = self.DRIVER_PATH
+
         env[
             "PYSPARK_SUBMIT_ARGS"
         ] = f"--driver-class-path {self.DRIVER_PATH} --jars {self.DRIVER_PATH} pyspark-shell"
-        env["SPARK_CLASSPATH"] = self.DRIVER_PATH
 
         # Crear sesión de Spark
         self.spark = (
