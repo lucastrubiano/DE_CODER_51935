@@ -121,6 +121,7 @@ services:
     container_name: pyspark
     hostname: pyspark
     ports:
+      - "4040:4040"
       - "8888:8888"
     volumes:
       - ./spark_working_dir:/home/pyspark/working_dir
@@ -133,3 +134,5 @@ services:
       NB_GID: 1000
       CHOWN_HOME: 'yes'
       CHOWN_HOME_OPTS: '-R'
+      SPARK_CLASSPATH: '/home/pyspark/working_dir/driver_jdbc/postgresql-42.5.2.jar'
+      
