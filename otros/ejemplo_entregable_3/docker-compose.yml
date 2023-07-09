@@ -125,14 +125,13 @@ services:
       - SPARK_RPC_ENCRYPTION_ENABLED=no
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
       - SPARK_SSL_ENABLED=no
-      - SPARK_CLASSPATH=/home/spark/working_dir/driver_jdbc/postgresql-42.5.2.jar
     ports:
       - '8090:8080'
       - '7077:7077'
     env_file:
       - .env
     volumes:
-      - ./spark_working_dir:/home/spark/working_dir
+      # - ./spark_working_dir:/home/spark/working_dir
       - ./scripts/postgresql-42.5.2.jar:/tmp/drivers/postgresql-42.5.2.jar
   
   spark-worker:
@@ -146,36 +145,8 @@ services:
       - SPARK_RPC_ENCRYPTION_ENABLED=no
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
       - SPARK_SSL_ENABLED=no
-      - SPARK_CLASSPATH=/home/spark/working_dir/driver_jdbc/postgresql-42.5.2.jar
     env_file:
       - .env
     volumes:
-      - ./spark_working_dir:/home/spark/working_dir
+      # - ./spark_working_dir:/home/spark/working_dir
       - ./scripts/postgresql-42.5.2.jar:/tmp/drivers/postgresql-42.5.2.jar
-
-  # pyspark:
-  #   image: jupyter/pyspark-notebook:2023-04-24
-  #   # limit the memory and cpu usage
-  #   # mem_limit: 512m
-  #   # mem_reservation: 128M
-  #   # cpus: 0.5
-  #   container_name: pyspark
-  #   hostname: pyspark
-  #   ports:
-  #     - "4040:4040"
-  #     - "8888:8888"
-  #   volumes:
-  #     - ./spark_working_dir:/home/pyspark/working_dir
-  #   user: root
-  #   working_dir: /home/pyspark/working_dir
-  #   environment:
-  #     JUPYTER_ENABLE_LAB: 1
-  #     JUPYTER_TOKEN: pyspark
-  #     NB_USER: pyspark
-  #     NB_GID: 1000
-  #     CHOWN_HOME: 'yes'
-  #     CHOWN_HOME_OPTS: '-R'
-  #     SPARK_CLASSPATH: '/home/pyspark/working_dir/driver_jdbc/postgresql-42.5.2.jar'
-  #   env_file:
-  #     - ".env"
-  #   command: python -m pip install psycopg2-binary

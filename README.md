@@ -11,6 +11,15 @@ Repositorio modificado por **Profesor Lucas Trubiano** para la comisión 51935 y
 - [Semana 4](Semana_4/Semana_4.md)
 - [Semana 5](Semana_5/Semana_5.md)
 - [Semana 6](Semana_6/Semana_6.md)
+- [Semana 7](Semana_7/Semana_7.md)
+- [Semana 8](Semana_8/Semana_8.md)
+- [Semana 9](Semana_9/Semana_9.md)
+- [Semana 10](Semana_10/Semana_10.md)
+- [Ejemplo Entregable 3](otros/ejemplo_entregable_3/ejemplo_entregable_3.md)
+- [Semana 11](Semana_11/Semana_11.md)
+- [Semana 12](Semana_12/Semana_12.md)
+
+
 
 
 ---
