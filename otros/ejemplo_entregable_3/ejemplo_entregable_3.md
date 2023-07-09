@@ -56,12 +56,13 @@ docker-compose up --build
 9. En la pestaña `Admin -> Connections` crear una nueva conexión con los siguientes datos para Spark:
     * Conn Id: `spark_default`
     * Conn Type: `Spark`
-    * Host: `spark://spark:7077`
+    * Host: `spark://spark`
+    * Port: `7077`
     * Extra: `{"queue": "default"}`
 10. En la pestaña `Admin -> Variables` crear una nueva variable con los siguientes datos:
-    * Key: `driver_path`
+    * Key: `driver_class_path`
     * Value: `/tmp/drivers/postgresql-42.5.2.jar`
 11. En la pestaña `Admin -> Variables` crear una nueva variable con los siguientes datos:
-    * Key: `spark_script_path`
-    * Value: `/tmp/scripts/`
+    * Key: `spark_script_dir`
+    * Value: `/opt/airflow/scripts`
 12. Ejecutar el DAG `etl_users`.
