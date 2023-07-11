@@ -3,8 +3,6 @@ from email import message
 from airflow.models import DAG, Variable
 from airflow.operators.python_operator import PythonOperator
 
-from os import environ as env
-
 import smtplib
 
 pais=['Argentina','Brasil','Colombia','Chile','Paraguay','Uruguay','Venezuela','Peru','Ecuador','Bolivia','Mexico']
@@ -25,11 +23,11 @@ def enviar():
         x=smtplib.SMTP('smtp.gmail.com',587)
         x.starttls()#
         # send email using password save in python variable
-        x.login(Variable.get('SMTP_EMAIL_FROM'),Variable.get('SMTP_PASSWORD'))
+        x.login(Variable.get('SMTP_EMAIL_FROM'), Variable.get('SMTP_PASSWORD'))
         subject='Fechas fin del mundo'
         body_text=final
         message='Subject: {}\n\n{}'.format(subject,body_text)
-        x.sendmail(Variable.get('SMTP_EMAIL_FROM'),Variable.get('SMTP_EMAIL_TO'),message)
+        x.sendmail(Variable.get('SMTP_EMAIL_FROM'), Variable.get('SMTP_EMAIL_TO'),message)
         print('Exito')
     except Exception as exception:
         print(exception)

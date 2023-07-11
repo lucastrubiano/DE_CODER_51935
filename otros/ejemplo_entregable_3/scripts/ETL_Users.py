@@ -4,6 +4,9 @@ import requests
 from datetime import datetime, timedelta
 from os import environ as env
 
+import yfinance
+print("andando con yfinance")
+
 from pyspark.sql.functions import concat, col, lit, when, expr, to_date
 
 from commons import ETL_Spark
