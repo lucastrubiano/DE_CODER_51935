@@ -20,8 +20,10 @@ def enviar():
         print('Failure')
 
 default_args={
-    'owner': 'DavidBU',
-    'start_date': datetime(2022,9,6)
+    'owner': 'Lucas T',
+    'start_date': datetime(2023,7,11),
+    'retries': 0,
+    'catchup': False,
 }
 
 with DAG(

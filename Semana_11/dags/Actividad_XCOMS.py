@@ -26,11 +26,11 @@ def _usar_tarea(ti):
 
 
 default_args={
-    'owner': 'DavidBU',
-    'start_date': datetime(2022,9,7),
-    'end_date': datetime(2022,12,20),
+    'owner': 'Lucas T',
+    'start_date': datetime(2023,7,11),
+    'end_date': datetime(2023,12,1),
     'depends_on_past': False,
-    'email': ['davidbu@gcp.com'],
+    'email': ['lucas.trubiano@gmail.com'],
     'email_on_failure': False
 }
 with DAG(

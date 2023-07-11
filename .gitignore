@@ -59,6 +59,7 @@ Semana_11/plugins
 # Semana_11/dags
 Semana_11/logs
 Semana_11/postgres_data
+Semana_11/config
 
 
 Proyecto_Final/*

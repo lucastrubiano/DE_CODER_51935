@@ -3,6 +3,8 @@ from email import message
 from airflow.models import DAG, Variable
 from airflow.operators.python_operator import PythonOperator
 
+from os import environ as env
+
 import smtplib
 
 pais=['Argentina','Brasil','Colombia','Chile','Paraguay','Uruguay','Venezuela','Peru','Ecuador','Bolivia','México']
@@ -21,20 +23,25 @@ print(final)
 def enviar():
     try:
         x=smtplib.SMTP('smtp.gmail.com',587)
-        x.starttls()
-        x.login('tu_email@gmail.com','NO_TE_DIRE_MI_CONTRASEÑA') # Cambia tu contraseña !!!!!!!!
+        x.starttls()#
+        # send email using password save in python variable
+        x.login(Variable.get('SMTP_EMAIL_FROM'),Variable.get('SMTP_PASSWORD'))
         subject='Fechas fin del mundo'
         body_text=final
         message='Subject: {}\n\n{}'.format(subject,body_text)
-        x.sendmail('tu_email@gmail.com','destinatario@gmail.com',message)
+        x.sendmail(Variable.get('SMTP_EMAIL_FROM'),Variable.get('SMTP_EMAIL_TO'),message)
         print('Exito')
     except Exception as exception:
         print(exception)
         print('Failure')
+        raise exception
 
 default_args={
-    'owner': 'DavidBU',
-    'start_date': datetime(2022,9,7)
+    'owner': 'Lucas T',
+    'start_date': datetime(2023,7,11),
+    'retries': 0,
+    'catchup': False,
+    'tags': ['microdesafio', 'semana 11']
 }
 
 with DAG(
