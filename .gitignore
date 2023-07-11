@@ -54,7 +54,12 @@ Semana_9/web-page/*
 Semana_10/Video_2_LanzandoAirflowConDocker/logs/*
 Semana_10/logs/*
 
-Semana_11/*
+# Semana_11/*
+Semana_11/plugins
+# Semana_11/dags
+Semana_11/logs
+Semana_11/postgres_data
+
 
 Proyecto_Final/*
 
