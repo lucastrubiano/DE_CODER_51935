@@ -63,6 +63,6 @@ docker-compose up --build
     * Key: `driver_class_path`
     * Value: `/tmp/drivers/postgresql-42.5.2.jar`
 11. En la pestaña `Admin -> Variables` crear una nueva variable con los siguientes datos:
-    * Key: `spark_script_dir`
+    * Key: `spark_scripts_dir`
     * Value: `/opt/airflow/scripts`
 12. Ejecutar el DAG `etl_users`.
