@@ -9,11 +9,11 @@ def enviar():
     try:
         x=smtplib.SMTP('smtp.gmail.com',587)
         x.starttls()
-        x.login('cuenta_remitente@gmail.com','password')
+        x.login(Variable.get('SMTP_EMAIL_FROM'),Variable.get('SMTP_PASSWORD'))
         subject='Ganaste un premio'
         body_text='Has ganado un premio fantastico!!!!'
         message='Subject: {}\n\n{}'.format(subject,body_text)
-        x.sendmail('cuenta_remitente@gmail.com','cuenta_destinatario@gmail.com',message)
+        x.sendmail(Variable.get('SMTP_EMAIL_FROM'),Variable.get('SMTP_EMAIL_TO'),message)
         print('Exito')
     except Exception as exception:
         print(exception)

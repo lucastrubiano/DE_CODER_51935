@@ -31,7 +31,8 @@ default_args={
     'end_date': datetime(2023,12,1),
     'depends_on_past': False,
     'email': ['lucas.trubiano@gmail.com'],
-    'email_on_failure': False
+    'email_on_failure': True,
+    'email_on_retry': True,
 }
 with DAG(
     dag_id ='dag_xcoms_facil',
