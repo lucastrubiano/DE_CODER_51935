@@ -6,7 +6,7 @@ from random import randint
 def _performance():
     return randint(1,10)
 
-def _elegir_mejor_valor(ti):  
+def _elegir_mejor_valor(ti):
     #esta funcion trea los tres valores de las tareas creadas    
     performance=ti.xcom_pull(task_ids=['empleado_A','empleado_B','empleado_C'])
     mejor_performance=max(performance) # elige el valor mas grande de la lista
