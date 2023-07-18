@@ -19,9 +19,11 @@ Repositorio modificado por **Profesor Lucas Trubiano** para la comisión 51935 y
 - [Semana 11](Semana_11/Semana_11.md)
 - **Semana 12**
     - [**Repo Docker Kafka+Kowl**](https://www.lionbloggertech.com/kowl-web-ui-to-explore-apache-kafka-messages-consumers-partitions/)
+    - [**Batch and Steaming with Spark**](https://medium.com/gousto-engineering-techbrunch/creating-a-spark-streaming-etl-pipeline-with-delta-lake-at-gousto-6fcbce36eba6)
     - [Repo: holgeradam/kafka-owl](https://github.com/holgeradam/kafka-owl/tree/master)
-    - [Repo Docker-compose: localstack/localstack/doc/external_services_integration/kafka_self_managed_cluster](https://github.com/localstack/localstack/blob/master/doc/external_services_integration/kafka_self_managed_cluster/docker-compose.yml)
-
+    - [Repo: Docker-compose: localstack/kafka_self_managed_cluster](https://github.com/localstack/localstack/blob/master/doc/external_services_integration/kafka_self_managed_cluster/docker-compose.yml)
+    - [Comparativa Spark vs Flink vs Storm vs Kafka](https://medium.com/@chandanbaranwal/spark-streaming-vs-flink-vs-storm-vs-kafka-streams-vs-samza-choose-your-stream-processing-91ea3f04675b)
+    - [Batch vs Streaming Architecture - Walmart Global Tech Blog](https://medium.com/walmartglobaltech/how-we-built-a-data-pipeline-with-lambda-architecture-using-spark-spark-streaming-9d3b4b4555d3)
 
 
 
