@@ -54,6 +54,7 @@ class ETL_Spark:
             self.conn_redshift.close()
         except:
             print(">>> [init] No se pudo conectar a Redshift")
+            raise Exception(">>> [init] No se pudo conectar a Redshift")
 
     def execute(self, process_date: str):
         """

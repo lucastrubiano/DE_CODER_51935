@@ -17,7 +17,10 @@ Repositorio modificado por **Profesor Lucas Trubiano** para la comisión 51935 y
 - [Semana 10](Semana_10/Semana_10.md)
 - [Ejemplo Entregable 3](otros/ejemplo_entregable_3/ejemplo_entregable_3.md)
 - [Semana 11](Semana_11/Semana_11.md)
-- [Semana 12](Semana_12/Semana_12.md)
+- **Semana 12**
+    - [**Repo Docker Kafka+Kowl**](https://www.lionbloggertech.com/kowl-web-ui-to-explore-apache-kafka-messages-consumers-partitions/)
+    - [Repo: holgeradam/kafka-owl](https://github.com/holgeradam/kafka-owl/tree/master)
+    - [Repo Docker-compose: localstack/localstack/doc/external_services_integration/kafka_self_managed_cluster](https://github.com/localstack/localstack/blob/master/doc/external_services_integration/kafka_self_managed_cluster/docker-compose.yml)
 
 
 

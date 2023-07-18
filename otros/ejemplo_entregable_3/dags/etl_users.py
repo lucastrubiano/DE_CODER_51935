@@ -49,6 +49,7 @@ defaul_args = {
     "start_date": datetime(2023, 7, 1),
     "retries": 0,
     "retry_delay": timedelta(seconds=5),
+    'catchup': False,
 }
 
 with DAG(

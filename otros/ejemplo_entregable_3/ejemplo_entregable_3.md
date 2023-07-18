@@ -35,8 +35,8 @@ DRIVER_PATH=/tmp/drivers/postgresql-42.5.2.jar
 ```
 4. Descargar las imagenes de Airflow y Spark.
 ```bash
-docker-compose pull lucastrubiano/airflow:airflow_2_6_2
-docker-compose pull lucastrubiano/spark:spark_3_4_1
+docker pull lucastrubiano/airflow:airflow_2_6_2
+docker pull lucastrubiano/spark:spark_3_4_1
 ```
 5. Las imagenes fueron generadas a partir de los Dockerfiles ubicados en `docker_images/`. Si se desea generar las imagenes nuevamente, ejecutar los comandos que están en los Dockerfiles.
 6. Ejecutar el siguiente comando para levantar los servicios de Airflow y Spark.
