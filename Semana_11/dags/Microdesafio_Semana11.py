@@ -20,6 +20,8 @@ print(final)
 
 def enviar():
     try:
+        return None
+        raise Exception('Error')
         x=smtplib.SMTP('smtp.gmail.com',587)
         x.starttls()#
         # send email using password save in python variable
@@ -27,6 +29,22 @@ def enviar():
         subject='Fechas fin del mundo'
         body_text=final
         message='Subject: {}\n\n{}'.format(subject,body_text)
+        x.sendmail(Variable.get('SMTP_EMAIL_FROM'), Variable.get('SMTP_EMAIL_TO'),message)
+        print('Exito')
+    except Exception as exception:
+        print(exception)
+        print('Failure')
+        raise exception
+    
+def enviar_fallo():
+    try:
+        x=smtplib.SMTP('smtp.gmail.com',587)
+        x.starttls()#
+        # send email using password save in python variable
+        x.login(Variable.get('SMTP_EMAIL_FROM'), Variable.get('SMTP_PASSWORD'))
+        subject='Fallo tu dag'
+        body_text=final
+        message='Fallo el dag dag_smtp_email_fin_mundo'
         x.sendmail(Variable.get('SMTP_EMAIL_FROM'), Variable.get('SMTP_EMAIL_TO'),message)
         print('Exito')
     except Exception as exception:
@@ -52,4 +70,10 @@ with DAG(
         python_callable=enviar
     )
 
-    tarea_1
+    aviso_fallo=PythonOperator(
+        task_id='enviar_fallo',
+        python_callable=enviar_fallo,
+        trigger_rule='all_failed'
+    )
+
+    tarea_1 >> aviso_fallo
