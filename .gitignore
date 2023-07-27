@@ -62,10 +62,8 @@ Semana_11/logs
 Semana_11/postgres_data
 Semana_11/config
 
-
-Proyecto_Final/*
+Semana_12/zk-single-kafka-single
 
 otros/docker_bigdata/*
 otros/ejemplo_entregable_3/postgres_data/*
 otros/ejemplo_entregable_3/logs/*
-
