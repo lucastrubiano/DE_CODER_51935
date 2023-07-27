@@ -14,5 +14,10 @@ kafka-topics --list --bootstrap-server kafka1:9092
 kafka-topics --delete --bootstrap-server kafka1:9092 --topic test
 
 // consumer group
+docker exec -it semana_12-kafka1-1 bash
 kafka-console-consumer --bootstrap-server kafka1:9092 --topic test --group terminal-consumer-group --from-beginning
+
+// producer
+docker exec -it semana_12-kafka1-1 bash
+kafka-console-producer --broker-list kafka1:9092 --topic test
 ```
